@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+       
+       let userName = ''
+            let cookies = 0
+        let upgrade = 0
+        updateView()
+        async function updateView(){
+           await getUserData()
+
+            document.getElementById('app').innerHTML = `
+            <div>User: ${userName}</div>
+            <div>Cookies: ${cookies}</div>
+            <div>Upgrade: ${upgrade}</div>            `
+        }
+
+        async function getUserData(){
+             let res = await axios.get('https://localhost:44377/userdata/marieAs')
+             console.log(res.data)
+       
+             userName = res.data.userName;
+             cookies = res.data.cookies;
+             upgrade = res.data.upgrade;
+        }
+    </script>
+    
+</body>
+</html>
